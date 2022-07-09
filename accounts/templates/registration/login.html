@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <title>Login</title>
+</head>
+<body>
+    <img src="{% static 'landing.jpg' %}" alt="not found">
+    <div class="conatainer">
+        <div class="loginBar">
+            <form method="POST">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    <div class="redirect">
+        <h3>You don't have an account ? <a href="{% url 'registration' %}">Register</a></h3>
+    </div>
+</body>
+</html>
