@@ -16,6 +16,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker push majidav10/test-repo-1:latest
+      run: docker build . --file Dockerfile --tag majidav10/test-repo-1:latest
     - name : push the docker image
       run : docker login -u majidav10 -p ${{ secrets.DOCKER_TOKEN }} && docker push docker push majidav10/test-repo-1:latest
