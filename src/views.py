@@ -1,7 +1,11 @@
+from audioop import reverse
+import genericpath
 from django.contrib.auth import authenticate
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.shortcuts import render, HttpResponse
+from accounts.models import CustomUser
+from django.views import generic
 
 from src.forms import CustomSignupForm
 
@@ -11,8 +15,14 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
+class Signup(generic.CreateView):
+    form_class = CustomSignupForm
+    success_url = reverse_lazy("index")
+    template_name = "signup.html"
+
+
 def registration(request):
-    context = {}
+    errors = ''
     if request.method == 'POST':
         form = CustomSignupForm(request.POST)
         if form.is_valid():
@@ -21,8 +31,16 @@ def registration(request):
                                     password=form.cleaned_data['password1'],)
             return HttpResponseRedirect(reverse_lazy('index'))
         else :
-            context['errors'] = form.errors
+            pass
+            
     form = CustomSignupForm()
-    context["form"]= form #type: ignore
-    return render(request,"signup.html", context=context)
+    return render(request,"signup.html", {'form':form, 'errors' : errors})
 
+# if form.is_valid():
+#                 user = form.save(commit=False)
+    
+#                 user.is_valid = False
+#                 user.save()
+#                 # Maybe redirect here
+#             else:
+#                 messages.info(request, 'invalid registration details')
