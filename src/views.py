@@ -6,7 +6,7 @@ from django.shortcuts import render, HttpResponse
 from src.forms import CustomSignupForm
 
 def index(request):
-    return HttpResponse('Hello')
+    return render(request, 'index.html')
 
 def login(request):
     return render(request, 'login.html')
