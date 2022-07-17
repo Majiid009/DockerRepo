@@ -3,7 +3,7 @@ import genericpath
 from django.contrib.auth import authenticate
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import redirect, render, HttpResponse
 from accounts.models import CustomUser
 from django.views import generic
 
