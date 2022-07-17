@@ -10,6 +10,8 @@ from django.views import generic
 from src.forms import CustomSignupForm
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('/login')
     return render(request, 'index.html')
 
 def login(request):
